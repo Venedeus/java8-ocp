@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>by.iba.gomel</groupId>
+    <artifactId>jse8-root</artifactId>
+    <version>1.0.0</version>
+  </parent>
+
+  <groupId>by.iba.gomel.yshviatsou</groupId>
+  <artifactId>jse8</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <name>yshviatsou-jse8</name>
+  <description>Solution for exercises of "Java Standard Edition (JSE) 8" OpenOLAT learning course.</description>
+
+  <organization>
+    <name>IBA-Gomel-Park</name>
+    <url>http://www.gomel.iba.by/</url>
+  </organization>
+
+  <issueManagement>
+    <url>https://gml-jbpm.gomel.iba.by/sonarqube/component_issues/index?id=by.iba.gomel.yshviatsou%3Ajse8#resolved=false</url>
+  </issueManagement>
+
+  <ciManagement>
+    <url>https://gml-jbpm.gomel.iba.by/jenkins/job/yshviatsou-jse8/</url>
+    <system>Jenkins</system>
+  </ciManagement>
+
+  <modules>
+    <module>wrappers-task1</module>
+    <module>wrappers-task2</module>
+    <module>wrappers-task3</module>
+    <module>wrappers-task4</module>
+    <module>nested-classes-task</module>
+    <module>inner-classes-task</module>
+    <module>anonymous-classes-task</module>
+    <module>local-classes-task</module>
+    <module>annotations-task1</module>
+    <module>annotations-task2</module>
+    <module>annotations-task3</module>
+    <module>lambda-task1</module>
+    <module>lambda-task2</module>
+    <module>lambda-task3</module>
+    <module>assertions-task</module>
+    <module>enum-types-task1</module>
+    <module>enum-types-task2</module>
+    <module>regexp-task1</module>
+    <module>regexp-task2</module>
+    <module>regexp-task3</module>
+    <module>generics-task1</module>
+  </modules>
+
+  <dependencies>
+    <!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-classic -->
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>1.2.3</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-simple -->
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-simple</artifactId>
+      <version>1.7.21</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>1.7.25</version>
+    </dependency>
+  </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>2.5.1</version>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-failsafe-plugin</artifactId>
+        <version>2.12.4</version>
+        <executions>
+          <execution>
+            <id>test</id>
+            <goals>
+              <goal>integration-test</goal>
+              <goal>verify</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>

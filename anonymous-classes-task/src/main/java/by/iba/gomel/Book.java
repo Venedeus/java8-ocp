@@ -1,0 +1,205 @@
+/**
+ *
+ */
+package by.iba.gomel;
+
+import java.util.Locale;
+
+/**
+ * This class realize a book with title and pages. Page - is an inner class of
+ * page and content. There is a nested static class to get a content from a
+ * given book and page.
+ */
+public class Book implements Translatable {
+	/**
+	 * String constant - blank symbol.
+	 */
+	private static final String BLANK = " ";
+	/**
+	 * String constant for demo-content.
+	 */
+	private static final String DEMO_CONTENT = " - Some demo content";
+
+	/**
+	 * Title of a book.
+	 */
+	private final String bookTitle;
+	/**
+	 * An array of pages.
+	 */
+	private final Page[] pages;
+	/**
+	 * Number of current page.
+	 */
+	private int currentPageNumber;
+	/**
+	 * Locale of the book.
+	 */
+	private Locale locale;
+
+	/**
+	 * Custom constructor.
+	 *
+	 * @param bookTitle
+	 *            - a title of a book.
+	 * @param numberOfPages
+	 *            - number of pages in a book.
+	 */
+	public Book(final String bookTitle, final int numberOfPages) {
+		this.bookTitle = bookTitle;
+		this.pages = new Page[numberOfPages];
+		this.demoInitializer();
+		this.translate();
+	}
+
+	/**
+	 * This method returns amount of pages in a book.
+	 *
+	 * @return amount of pages in a book.
+	 */
+	public int getBookLength() {
+		return this.pages.length;
+	}
+
+	/**
+	 * This method returns a content of a current page.
+	 *
+	 * @return a content of a current page.
+	 */
+	public String getCurrentPageContent() {
+		String content = null;
+
+		for (final Page page : this.pages) {
+			if (page.getPageNumber() == this.currentPageNumber) {
+
+				content = this.locale.toString() + Book.BLANK + page.getContent();
+
+				break;
+			}
+		}
+
+		return content;
+	}
+
+	/**
+	 * This method overrides interface method
+	 * {@link by.iba.gomel.Translatable#print()}.
+	 *
+	 * @return content of the book.
+	 */
+	@Override
+	public String print() {
+		final StringBuilder allBookContent = new StringBuilder();
+		for (final Page page : this.pages) {
+			allBookContent.append(page.getContent()).append("\n");
+		}
+
+		return allBookContent.toString();
+	}
+
+	/**
+	 * Setter for {@link #currentPageNumber}.
+	 *
+	 * @param currentPageNumber
+	 *            - value of current page number to be set.
+	 */
+	public void setCurrentPageNumber(final int currentPageNumber) {
+		this.currentPageNumber = currentPageNumber;
+	}
+
+	/**
+	 * This method realize translation according to given locale and overrides
+	 * interface method {@link by.iba.gomel.Translatable#translate(Locale))}.
+	 *
+	 * @param locale
+	 *            - locale to be used.
+	 */
+	@Override
+	public void translate(final Locale locale) {
+		this.locale = locale;
+	}
+
+	/**
+	 * This is a demo-method to initialize a book with some content.
+	 */
+	private void demoInitializer() {
+		for (int i = 0; i < this.pages.length; i++) {
+			this.pages[i] = new Page(i + 1, this.bookTitle + (i + 1) + Book.DEMO_CONTENT);
+		}
+	}
+
+	/**
+	 * This method realize default translation [En].
+	 *
+	 * @param locale
+	 *            - locale to be used.
+	 */
+	private void translate() {
+		this.translate(new Locale("En"));
+	}
+
+	/**
+	 * This is a nested static class to get a content from a current page of a
+	 * book.
+	 */
+	public static class Contents {
+		/**
+		 * This method returns a content in a given book of a given page.
+		 *
+		 * @param book
+		 *            - given book.
+		 * @param currentPageNumber
+		 *            - number of a page to get a content.
+		 * @return a content in a page of a book.
+		 */
+		public String getPageContent(final Book book, final int currentPageNumber) {
+			book.setCurrentPageNumber(currentPageNumber);
+			return book.getCurrentPageContent();
+		}
+	}
+
+	/**
+	 * This is an inner class realizes a page.
+	 */
+	private class Page {
+		/**
+		 * Page's number.
+		 */
+		int pageNumber;
+		/**
+		 * Content of a page.
+		 */
+		String content;
+
+		/**
+		 * Custom constructor.
+		 *
+		 * @param pageNumber
+		 *            - number of a page.
+		 * @param content
+		 *            - content of a page.
+		 */
+		public Page(final int pageNumber, final String content) {
+			this.pageNumber = pageNumber;
+			this.content = content;
+		}
+
+		/**
+		 * Getter for {@link #content}.
+		 *
+		 * @return content of a page.
+		 */
+		public String getContent() {
+			return this.content;
+		}
+
+		/**
+		 * Getter for {@link #pageNumber}.
+		 *
+		 * @return number of a page.
+		 */
+		public int getPageNumber() {
+			return this.pageNumber;
+		}
+	}
+}
